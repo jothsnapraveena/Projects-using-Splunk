@@ -50,6 +50,15 @@ index=final_6_splunkproject "Is Attack IP"="TRUE" | top limit=10 "User Agent Str
 ### 9. Statistics on Account Takeover Incidents
 index=final_6_splunkproject "Is Attack IP"="TRUE" | stats count by "Is Account Takeover"
 
+### 10. Find users with multiple failed login attempts
+index=final_6_splunkproject "Login Successful"="FALSE"
+| stats count by "User ID"
+| where count > 3
+| table "User ID", count
+| sort - count
+| head 10
+
+
 
 
 
